@@ -29,7 +29,7 @@ class StartActivity:
         selected_option = self.context.input_controller.wait_selector(
             title='# Start Menu',
             options=[
-                # OPTION_TEST,
+                OPTION_TEST,
                 OPTION_WIFI,
                 OPTION_HELLO,
             ]
@@ -40,4 +40,4 @@ class StartActivity:
         elif selected_option == OPTION_WIFI:
             return AppContext.ACTIVITY_ID_WIFI_MAIN
         elif selected_option == OPTION_TEST:
-            pass
+            self.context.input_controller.wait_input()
