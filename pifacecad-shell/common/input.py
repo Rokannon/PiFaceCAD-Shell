@@ -33,7 +33,7 @@ class InputController:
                     continue
                 cursor_position += 1
                 if cursor_position == len(input_chars):
-                    input_chars.append('a')
+                    input_chars.append(input_chars[-1])
             elif button_id == ButtonController.BUTTON_3:
                 if len(input_chars) == 1:
                     continue
