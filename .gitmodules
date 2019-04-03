@@ -1,0 +1,3 @@
+[submodule "submodules/pifacecad"]
+	path = submodules/pifacecad
+	url = https://github.com/piface/pifacecad.git

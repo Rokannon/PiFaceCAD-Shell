@@ -1,10 +1,7 @@
-import time
-
 from common.context import AppContext
 from common.display import DisplayRenderer
 
 OPTION_TEST = 'Test'
-OPTION_SCRIPT = 'Run Script'
 OPTION_WIFI = 'Setup Wi-Fi'
 OPTION_HELLO = 'Say "Hello"'
 
@@ -33,16 +30,12 @@ class StartActivity:
             title='# Start Menu',
             options=[
                 # OPTION_TEST,
-                OPTION_SCRIPT,
                 OPTION_WIFI,
                 OPTION_HELLO,
             ]
         )
 
-        if selected_option == OPTION_SCRIPT:
-            self.context.display_renderer.set_line('Not implemented', DisplayRenderer.LINE_FIRST)
-            time.sleep(1.0)
-        elif selected_option == OPTION_HELLO:
+        if selected_option == OPTION_HELLO:
             return AppContext.ACTIVITY_ID_HELLO
         elif selected_option == OPTION_WIFI:
             return AppContext.ACTIVITY_ID_WIFI_MAIN

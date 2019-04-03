@@ -1,4 +1,5 @@
 import pifacecad
+
 from activities.hello import HelloActivity
 from activities.start import StartActivity
 from activities.wifi import WifiMainActivity

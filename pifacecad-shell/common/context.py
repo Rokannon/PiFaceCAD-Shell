@@ -1,8 +1,9 @@
+from pifacecad import PiFaceCAD
+
 from common.buttons import ButtonController
 from common.display import DisplayRenderer
 from common.input import InputController
 from common.process import ProcessController
-from pifacecad import PiFaceCAD
 
 
 class AppContext:

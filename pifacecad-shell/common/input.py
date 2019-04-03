@@ -1,8 +1,9 @@
 import time
 
+from pifacecad import PiFaceCAD
+
 from common.buttons import ButtonController
 from common.display import DisplayRenderer
-from pifacecad import PiFaceCAD
 
 
 class InputController:
