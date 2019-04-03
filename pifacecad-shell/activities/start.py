@@ -38,6 +38,6 @@ class StartActivity:
         if selected_option == OPTION_HELLO:
             return AppContext.ACTIVITY_ID_HELLO
         elif selected_option == OPTION_WIFI:
-            return AppContext.ACTIVITY_ID_WIFI_MAIN
+            return AppContext.ACTIVITY_ID_WIFI
         elif selected_option == OPTION_TEST:
             self.context.input_controller.wait_input()

@@ -2,7 +2,7 @@ import pifacecad
 
 from activities.hello import HelloActivity
 from activities.start import StartActivity
-from activities.wifi import WifiMainActivity
+from activities.wifi import WifiActivity
 from common.context import AppContext
 
 
@@ -15,7 +15,7 @@ class Application:
         self.activity_by_id = {
             AppContext.ACTIVITY_ID_START: StartActivity(self.context),
             AppContext.ACTIVITY_ID_HELLO: HelloActivity(self.context),
-            AppContext.ACTIVITY_ID_WIFI_MAIN: WifiMainActivity(self.context),
+            AppContext.ACTIVITY_ID_WIFI: WifiActivity(self.context),
         }
 
     def run(self):

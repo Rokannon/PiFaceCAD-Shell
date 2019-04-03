@@ -1,16 +1,14 @@
-from pifacecad import PiFaceCAD
-
 from common.buttons import ButtonController
 from common.display import DisplayRenderer
 from common.input import InputController
 from common.process import ProcessController
+from pifacecad import PiFaceCAD
 
 
 class AppContext:
     ACTIVITY_ID_START = 0
     ACTIVITY_ID_HELLO = 1
-    ACTIVITY_ID_WIFI_MAIN = 2
-    ACTIVITY_ID_WIFI_SELECT = 3
+    ACTIVITY_ID_WIFI = 2
 
     def __init__(self, cad: PiFaceCAD):
         self.display_renderer = DisplayRenderer(cad)

@@ -31,7 +31,7 @@ MAIN_OPTION_CONNECT = 'Connect...'
 MAIN_OPTION_BACK = 'Back'
 
 
-class WifiMainActivity:
+class WifiActivity:
     def __init__(self, context: AppContext):
         self.context = context
 
