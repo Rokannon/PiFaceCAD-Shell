@@ -68,11 +68,11 @@ class InputController:
         self.cad.lcd.cursor_off()
         return None if cancelled else ''.join(input_chars)
 
-    def wait_selector(self, title, options):
+    def wait_selector(self, title, options, preselect=None):
         self.display_renderer.set_line(title, DisplayRenderer.LINE_FIRST)
-        selected_index = 0
+        selected_index = 0 if preselect is None else options.find(preselect)
         while True:
-            self.display_renderer.set_line('> ' + options[selected_index], DisplayRenderer.LINE_SECOND)
+            self.display_renderer.set_line('> {}'.format(options[selected_index]), DisplayRenderer.LINE_SECOND)
             button_id = self.button_controller.wait_button_press()
             if button_id == ButtonController.BUTTON_RIGHT:
                 selected_index = (selected_index + 1) % len(options)
