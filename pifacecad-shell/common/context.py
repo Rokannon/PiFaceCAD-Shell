@@ -1,5 +1,4 @@
 from common.buttons import ButtonController
-from common.camera import CameraController
 from common.display import DisplayRenderer
 from common.input import InputController
 from common.process import ProcessController
@@ -18,4 +17,3 @@ class AppContext:
         self.input_controller = InputController(cad, self.display_renderer, self.button_controller)
         self.process_controller = ProcessController(self.display_renderer, self.button_controller,
                                                     self.input_controller)
-        self.camera_controller = CameraController(self.process_controller)

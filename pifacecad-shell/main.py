@@ -23,19 +23,10 @@ class Application:
         self.cad.lcd.backlight_on()
         self.cad.lcd.cursor_off()
         self.cad.lcd.blink_off()
-        self.activate(AppContext.ACTIVITY_ID_START)
+        self.current_activity = self.activity_by_id[AppContext.ACTIVITY_ID_START]
         while True:
-            next_activity_id = self.current_activity.update()
-            if next_activity_id is not None:
-                self.activate(next_activity_id)
-
-    def activate(self, activity_id):
-        if self.current_activity:
-            self.current_activity.deactivate()
-            self.current_activity = None
-
-        self.current_activity = self.activity_by_id[activity_id]
-        self.current_activity.activate()
+            next_activity_id = self.current_activity.execute()
+            self.current_activity = self.activity_by_id[next_activity_id]
 
 
 def main():

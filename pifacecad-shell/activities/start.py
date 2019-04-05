@@ -11,36 +11,32 @@ class StartActivity:
     def __init__(self, context: AppContext):
         self.context = context
         self.first_run = True
+        self.selected_option = None
 
-    def activate(self):
+    def execute(self):
         if self.first_run:
+            self.first_run = False
             self.context.display_renderer.set_line('PiFaceCAD Shell', DisplayRenderer.LINE_FIRST)
             self.context.display_renderer.set_line('v1.0', DisplayRenderer.LINE_SECOND)
             self.context.button_controller.wait_button_press()
-            self.first_run = False
 
-    def deactivate(self):
-        pass
+        while True:
+            self.selected_option = self.context.input_controller.wait_selector(
+                title='# Start Menu',
+                options=[
+                    # OPTION_TEST,
+                    OPTION_WIFI,
+                    OPTION_HELLO,
+                    OPTION_CAMERA,
+                ],
+                preselect=self.selected_option,
+            )
 
-    def update(self):
-        if self.first_run:
-            return
-
-        selected_option = self.context.input_controller.wait_selector(
-            title='# Start Menu',
-            options=[
-                OPTION_TEST,
-                OPTION_WIFI,
-                OPTION_HELLO,
-                OPTION_CAMERA,
-            ]
-        )
-
-        if selected_option == OPTION_HELLO:
-            return AppContext.ACTIVITY_ID_HELLO
-        elif selected_option == OPTION_WIFI:
-            return AppContext.ACTIVITY_ID_WIFI
-        elif selected_option == OPTION_TEST:
-            self.context.input_controller.wait_input()
-        elif selected_option == OPTION_CAMERA:
-            return AppContext.ACTIVITY_ID_CAMERA
+            if self.selected_option == OPTION_HELLO:
+                return AppContext.ACTIVITY_ID_HELLO
+            elif self.selected_option == OPTION_WIFI:
+                return AppContext.ACTIVITY_ID_WIFI
+            elif self.selected_option == OPTION_TEST:
+                self.context.input_controller.wait_input()
+            elif self.selected_option == OPTION_CAMERA:
+                return AppContext.ACTIVITY_ID_CAMERA

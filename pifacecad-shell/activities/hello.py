@@ -106,18 +106,18 @@ class HelloActivity:
         self.context = context
         self.hello_by_language = {}
 
-    def activate(self):
+    def execute(self):
         for i, line in enumerate(RAW_DATA):
             if i % 2 == 0:
                 self.hello_by_language[line] = RAW_DATA[i + 1]
 
         language = random.choice(list(self.hello_by_language.keys()))
+
         self.context.display_renderer.set_line(language + ':', DisplayRenderer.LINE_FIRST)
         self.context.display_renderer.set_line(self.hello_by_language[language], DisplayRenderer.LINE_SECOND)
 
-    def deactivate(self):
+        self.context.button_controller.wait_button_press()
+
         self.hello_by_language.clear()
 
-    def update(self):
-        self.context.button_controller.wait_button_press()
         return AppContext.ACTIVITY_ID_START
