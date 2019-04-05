@@ -130,5 +130,6 @@ class CameraController:
             proc_args.append(str(setting.value))
 
         self.process_controller.wait_process(
+            title='Making photo...',
             args=proc_args,
         )

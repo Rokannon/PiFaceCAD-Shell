@@ -13,10 +13,10 @@ class ProcessController:
         self.button_controller = button_controller
         self.input_controller = input_controller
 
-    def wait_process(self, args):
+    def wait_process(self, title, args):
         start_time = time.time()
 
-        self.display_renderer.set_line('Working...', DisplayRenderer.LINE_FIRST)
+        self.display_renderer.set_line(title, DisplayRenderer.LINE_FIRST)
         self.display_renderer.set_line('kill  -  -  -  -', DisplayRenderer.LINE_SECOND)
 
         stdout_lines = []

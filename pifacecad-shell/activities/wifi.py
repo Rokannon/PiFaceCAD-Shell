@@ -53,7 +53,10 @@ class WifiActivity:
 
         if selected_option == OPTION_STATUS:
             # Show SSID
-            result_lines = self.context.process_controller.wait_process(['iwconfig', 'wlan0'])
+            result_lines = self.context.process_controller.wait_process(
+                title='Getting SSID...',
+                args=['iwconfig', 'wlan0'],
+            )
             if result_lines is None:
                 return
             match = None
@@ -70,7 +73,10 @@ class WifiActivity:
             self.context.button_controller.wait_button_press()
 
             # Show IP
-            result_lines = self.context.process_controller.wait_process(['ifconfig', 'wlan0'])
+            result_lines = self.context.process_controller.wait_process(
+                title='Getting IP...',
+                args=['ifconfig', 'wlan0'],
+            )
             if result_lines is None:
                 return
             match = None
@@ -85,7 +91,10 @@ class WifiActivity:
                 self.context.display_renderer.set_line('Unknown', DisplayRenderer.LINE_SECOND)
             self.context.button_controller.wait_button_press()
         elif selected_option == OPTION_CONNECT:
-            result_lines = self.context.process_controller.wait_process(['iwlist', 'wlan0', 'scan'])
+            result_lines = self.context.process_controller.wait_process(
+                title='Scanning...',
+                args=['iwlist', 'wlan0', 'scan'],
+            )
             ssids = []
             for line in result_lines:
                 match = ESSID_REGEX.match(line)
