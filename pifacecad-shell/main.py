@@ -1,5 +1,5 @@
 import pifacecad
-
+from activities.camera import CameraActivity
 from activities.hello import HelloActivity
 from activities.start import StartActivity
 from activities.wifi import WifiActivity
@@ -16,6 +16,7 @@ class Application:
             AppContext.ACTIVITY_ID_START: StartActivity(self.context),
             AppContext.ACTIVITY_ID_HELLO: HelloActivity(self.context),
             AppContext.ACTIVITY_ID_WIFI: WifiActivity(self.context),
+            AppContext.ACTIVITY_ID_CAMERA: CameraActivity(self.context),
         }
 
     def run(self):

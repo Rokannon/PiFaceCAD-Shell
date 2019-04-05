@@ -4,6 +4,7 @@ from common.display import DisplayRenderer
 OPTION_TEST = 'Test'
 OPTION_WIFI = 'Setup Wi-Fi'
 OPTION_HELLO = 'Say "Hello"'
+OPTION_CAMERA = 'Use Camera'
 
 
 class StartActivity:
@@ -31,6 +32,7 @@ class StartActivity:
                 OPTION_TEST,
                 OPTION_WIFI,
                 OPTION_HELLO,
+                OPTION_CAMERA,
             ]
         )
 
@@ -40,3 +42,5 @@ class StartActivity:
             return AppContext.ACTIVITY_ID_WIFI
         elif selected_option == OPTION_TEST:
             self.context.input_controller.wait_input()
+        elif selected_option == OPTION_CAMERA:
+            return AppContext.ACTIVITY_ID_CAMERA
