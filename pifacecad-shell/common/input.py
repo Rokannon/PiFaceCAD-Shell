@@ -5,6 +5,16 @@ from common.display import DisplayRenderer
 from pifacecad import PiFaceCAD
 
 
+def get_common_start_length(str1, str2):
+    length = 0
+    for i in range(min(len(str1), len(str2))):
+        if str1[i] == str2[i]:
+            length += 1
+        else:
+            break
+    return length
+
+
 class InputController:
     LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz1234567890-='
     UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+'
@@ -70,7 +80,17 @@ class InputController:
 
     def wait_selector(self, title, options, preselect=None):
         self.display_renderer.set_line(title, DisplayRenderer.LINE_FIRST)
-        selected_index = 0 if preselect is None else options.index(preselect)
+        selected_index = 0
+
+        # fixme ugly hack
+        if preselect is not None:
+            best_score = None
+            for i, option in enumerate(options):
+                score = get_common_start_length(str(option), str(preselect))
+                if best_score is None or best_score < score:
+                    best_score = score
+                    selected_index = i
+
         while True:
             self.display_renderer.set_line('> {}'.format(options[selected_index]), DisplayRenderer.LINE_SECOND)
             button_id = self.button_controller.wait_button_press()

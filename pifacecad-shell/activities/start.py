@@ -25,8 +25,8 @@ class StartActivity:
                 title='# Start Menu',
                 options=[
                     # OPTION_TEST,
-                    OPTION_WIFI,
                     OPTION_HELLO,
+                    OPTION_WIFI,
                     OPTION_CAMERA,
                 ],
                 preselect=self.selected_option,

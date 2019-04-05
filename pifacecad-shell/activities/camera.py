@@ -1,9 +1,13 @@
 import time
 
+from common.buttons import ButtonController
 from common.context import AppContext
+from common.display import DisplayRenderer
 
 OPTION_PHOTO = 'Make Photo'
-OPTION_SETTINGS = 'Settings'
+OPTION_TIMELAPSE = 'Make Timelapse'
+OPTION_SETTINGS = 'Photo Settings'
+# OPTION_DELAY = 'Delay: 15 sec'
 OPTION_BACK = 'Back'
 
 
@@ -14,11 +18,13 @@ class CameraSetting:
             value,
             options,
             command,
+            use_index=False,
     ):
         self.name = name
         self.value = value
         self.options = options
         self.command = command
+        self.use_index = use_index
 
     def get_title(self):
         return '{}: {}'.format(self.name, self.value)
@@ -123,7 +129,27 @@ class CameraActivity:
                 ],
                 command='--imxfx',
             ),
+            # CameraSetting(
+            #     name='Mode',
+            #     value='640x480 42.1-60fps',
+            #     options=[
+            #         'auto',
+            #         '1920x1080 1-30fps',
+            #         '2592x1944 1-15fps',
+            #         '2592x1944 0.1666-1fps',
+            #         '1296x972 1-42fps',
+            #         '1296x730 1-49fps',
+            #         '640x480 42.1-60fps',
+            #         '640x480 60.1-90fps',
+            #     ],
+            #     command='--mode',
+            #     use_index=True,
+            # ),
         ]
+        self.delay = 15
+
+    def get_delay_title(self):
+        return 'Delay: {} sec'.format(self.delay)
 
     def execute(self):
         selected_option = None
@@ -133,7 +159,9 @@ class CameraActivity:
                 title='# Camera',
                 options=[
                     OPTION_PHOTO,
+                    OPTION_TIMELAPSE,
                     OPTION_SETTINGS,
+                    self.get_delay_title(),
                     OPTION_BACK,
                 ],
                 preselect=selected_option,
@@ -145,6 +173,10 @@ class CameraActivity:
                 self.execute_settings()
             elif selected_option == OPTION_BACK:
                 return AppContext.ACTIVITY_ID_START
+            elif selected_option == self.get_delay_title():
+                self.execute_delay()
+            elif selected_option == OPTION_TIMELAPSE:
+                self.execute_timelapse()
 
     def execute_photo(self):
         proc_args = [
@@ -155,7 +187,10 @@ class CameraActivity:
 
         for setting in self.settings:
             proc_args.append(setting.command)
-            proc_args.append(str(setting.value))
+            if setting.use_index:
+                proc_args.append(str(setting.options.index(setting.value)))
+            else:
+                proc_args.append(str(setting.value))
 
         self.context.process_controller.wait_process(
             title='Making photo...',
@@ -188,3 +223,29 @@ class CameraActivity:
                 options=selected_setting.options,
                 preselect=selected_setting.value,
             )
+
+    def execute_delay(self):
+        self.delay = self.context.input_controller.wait_selector(
+            title='# Setup delay:',
+            options=[15, 30, 60, 90],
+            preselect=self.delay,
+        )
+
+    def execute_timelapse(self):
+        while True:
+            photo_time = time.time()
+            self.execute_photo()
+            while time.time() - photo_time < self.delay:
+                self.context.display_renderer.set_line(
+                    text='Next in {}s...'.format(int(photo_time + self.delay + 1 - time.time())),
+                    line_id=DisplayRenderer.LINE_FIRST,
+                )
+                self.context.display_renderer.set_line(
+                    text='stop  -  -  -  -',
+                    line_id=DisplayRenderer.LINE_SECOND,
+                )
+                button_id = self.context.button_controller.wait_button_press(
+                    timeout=0.1,
+                )
+                if button_id == ButtonController.BUTTON_1:
+                    return

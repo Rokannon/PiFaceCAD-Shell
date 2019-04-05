@@ -20,7 +20,8 @@ class ButtonController:
         self.cad = cad
         self.time_pressed_by_id = collections.defaultdict(float)
 
-    def wait_button_press(self):
+    def wait_button_press(self, timeout=None):
+        start_time = time.time()
         while True:
             for button_id, switch in enumerate(self.cad.switches):
                 current_time = time.time()
@@ -28,6 +29,8 @@ class ButtonController:
                     self.time_pressed_by_id[button_id] = current_time
                     return button_id
             time.sleep(0.01)
+            if timeout is not None and time.time() - start_time > timeout:
+                return None
 
     def is_button_pressed(self, button_id):
         return self.cad.switches[button_id].value
