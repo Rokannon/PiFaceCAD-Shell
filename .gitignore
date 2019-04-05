@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 .idea/workspace.xml
 copy_to_raspberrypi.bat
+copy_from_raspberrypi.bat
