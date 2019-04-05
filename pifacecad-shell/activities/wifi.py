@@ -51,7 +51,7 @@ class WifiActivity:
             ]
         )
 
-        if selected_option == MAIN_OPTION_STATUS:
+        if selected_option == OPTION_STATUS:
             # Show SSID
             result_lines = self.context.process_controller.wait_process(['iwconfig', 'wlan0'])
             if result_lines is None:
@@ -84,7 +84,7 @@ class WifiActivity:
             else:
                 self.context.display_renderer.set_line('Unknown', DisplayRenderer.LINE_SECOND)
             self.context.button_controller.wait_button_press()
-        elif selected_option == MAIN_OPTION_CONNECT:
+        elif selected_option == OPTION_CONNECT:
             result_lines = self.context.process_controller.wait_process(['iwlist', 'wlan0', 'scan'])
             ssids = []
             for line in result_lines:
@@ -131,5 +131,5 @@ class WifiActivity:
             if confirm_setup:
                 with open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w') as config_file:
                     config_file.write(config_str)
-        elif selected_option == MAIN_OPTION_BACK:
+        elif selected_option == OPTION_BACK:
             return AppContext.ACTIVITY_ID_START
