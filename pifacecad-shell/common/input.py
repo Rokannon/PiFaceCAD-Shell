@@ -70,7 +70,7 @@ class InputController:
 
     def wait_selector(self, title, options, preselect=None):
         self.display_renderer.set_line(title, DisplayRenderer.LINE_FIRST)
-        selected_index = 0 if preselect is None else options.find(preselect)
+        selected_index = 0 if preselect is None else options.index(preselect)
         while True:
             self.display_renderer.set_line('> {}'.format(options[selected_index]), DisplayRenderer.LINE_SECOND)
             button_id = self.button_controller.wait_button_press()
