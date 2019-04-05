@@ -26,9 +26,9 @@ network={{
 ESSID_REGEX = re.compile('.*ESSID:"(.*?)".*')
 INET_ADDR_REGEX = re.compile('.*inet addr:(\d+\.\d+\.\d+\.\d+).*')
 
-MAIN_OPTION_STATUS = 'Show Status'
-MAIN_OPTION_CONNECT = 'Connect...'
-MAIN_OPTION_BACK = 'Back'
+OPTION_STATUS = 'Show Status'
+OPTION_CONNECT = 'Connect...'
+OPTION_BACK = 'Back'
 
 
 class WifiActivity:
@@ -45,9 +45,9 @@ class WifiActivity:
         selected_option = self.context.input_controller.wait_selector(
             title='# Wi-Fi Setup',
             options=[
-                MAIN_OPTION_STATUS,
-                MAIN_OPTION_CONNECT,
-                MAIN_OPTION_BACK,
+                OPTION_STATUS,
+                OPTION_CONNECT,
+                OPTION_BACK,
             ]
         )
 
