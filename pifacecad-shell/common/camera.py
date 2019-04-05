@@ -1,3 +1,5 @@
+import time
+
 from common.process import ProcessController
 
 
@@ -122,7 +124,7 @@ class CameraController:
     def wait_photo(self):
         proc_args = [
             'raspistill',
-            '--output', '/home/pi/picamera-images/image.jpg',
+            '--output', '/home/pi/picamera-images/single/image_{}.jpg'.format(int(time.time())),
             '--timeout', '1000',
         ]
 
