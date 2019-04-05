@@ -14,6 +14,6 @@ class AppContext:
     def __init__(self, cad: PiFaceCAD):
         self.display_renderer = DisplayRenderer(cad)
         self.button_controller = ButtonController(cad)
-        self.input_controller = InputController(cad, self.display_renderer, self.button_controller)
+        self.input_controller = InputController(self.display_renderer, self.button_controller)
         self.process_controller = ProcessController(self.display_renderer, self.button_controller,
                                                     self.input_controller)

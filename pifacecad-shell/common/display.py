@@ -44,3 +44,12 @@ class DisplayRenderer:
         for diff_index, diff_text in diff_by_index.items():
             self.cad.lcd.set_cursor(diff_index, line_id)
             self.cad.lcd.write(diff_text)
+
+    def cursor_on(self):
+        self.cad.lcd.cursor_on()
+
+    def cursor_off(self):
+        self.cad.lcd.cursor_off()
+
+    def set_cursor(self, col, row):
+        self.cad.lcd.set_cursor(col, row)

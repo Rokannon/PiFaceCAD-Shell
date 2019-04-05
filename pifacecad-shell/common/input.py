@@ -2,7 +2,6 @@ import time
 
 from common.buttons import ButtonController
 from common.display import DisplayRenderer
-from pifacecad import PiFaceCAD
 
 
 def get_common_start_length(str1, str2):
@@ -19,8 +18,7 @@ class InputController:
     LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz1234567890-='
     UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+'
 
-    def __init__(self, cad: PiFaceCAD, display_renderer: DisplayRenderer, button_controller: ButtonController):
-        self.cad = cad
+    def __init__(self, display_renderer: DisplayRenderer, button_controller: ButtonController):
         self.display_renderer = display_renderer
         self.button_controller = button_controller
 
@@ -28,11 +26,11 @@ class InputController:
         input_chars = ['a']
         cursor_position = 0
         cancelled = False
-        self.cad.lcd.cursor_on()
+        self.display_renderer.cursor_on()
         while True:
             self.display_renderer.set_line(''.join(input_chars), DisplayRenderer.LINE_FIRST)
             self.display_renderer.set_line('< > del ok cancl', DisplayRenderer.LINE_SECOND)
-            self.cad.lcd.set_cursor(cursor_position, 0)
+            self.display_renderer.set_cursor(cursor_position, 0)
             button_id = self.button_controller.wait_button_press()
             if button_id == ButtonController.BUTTON_1:
                 if cursor_position > 0:
@@ -75,7 +73,7 @@ class InputController:
                 else:  # old_char in self.UPPER_CHARS
                     new_char = self.LOWER_CHARS[self.UPPER_CHARS.find(old_char)]
                 input_chars[cursor_position] = new_char
-        self.cad.lcd.cursor_off()
+        self.display_renderer.cursor_off()
         return None if cancelled else ''.join(input_chars)
 
     def wait_selector(self, title, options, preselect=None):

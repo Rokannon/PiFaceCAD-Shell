@@ -244,8 +244,6 @@ class CameraActivity:
                     text='stop  -  -  -  -',
                     line_id=DisplayRenderer.LINE_SECOND,
                 )
-                button_id = self.context.button_controller.wait_button_press(
-                    timeout=0.1,
-                )
-                if button_id == ButtonController.BUTTON_1:
+                time.sleep(0.1)
+                if self.context.button_controller.is_button_pressed(ButtonController.BUTTON_1):
                     return
