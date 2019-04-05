@@ -9,7 +9,6 @@ OPTION_HELLO = 'Say "Hello"'
 class StartActivity:
     def __init__(self, context: AppContext):
         self.context = context
-        self.index = 0
         self.first_run = True
 
     def activate(self):
