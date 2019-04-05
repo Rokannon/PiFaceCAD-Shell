@@ -73,7 +73,7 @@ class CameraController:
             ),
             CameraSetting(
                 name='AWB',
-                value='off',
+                value='auto',
                 options=[
                     'off',
                     'auto',
@@ -123,8 +123,9 @@ class CameraController:
         proc_args = [
             'raspistill',
             '--output', '/home/pi/picamera-images/image.jpg',
-            '--timeout', '0',
+            '--timeout', '1000',
         ]
+
         for setting in self.settings:
             proc_args.append(setting.command)
             proc_args.append(str(setting.value))
