@@ -1,3 +1,6 @@
 [submodule "submodules/pifacecad"]
 	path = submodules/pifacecad
 	url = https://github.com/piface/pifacecad.git
+[submodule "submodules/python-telegram-bot"]
+	path = submodules/python-telegram-bot
+	url = https://github.com/python-telegram-bot/python-telegram-bot.git
