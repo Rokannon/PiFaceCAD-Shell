@@ -11,7 +11,6 @@ class Application:
         self.cad = pifacecad.PiFaceCAD()
         self.context = AppContext(self.cad)
 
-        self.current_activity = None
         self.activity_by_id = {
             AppContext.ACTIVITY_ID_START: StartActivity(self.context),
             AppContext.ACTIVITY_ID_HELLO: HelloActivity(self.context),
@@ -23,10 +22,11 @@ class Application:
         self.cad.lcd.backlight_on()
         self.cad.lcd.cursor_off()
         self.cad.lcd.blink_off()
-        self.current_activity = self.activity_by_id[AppContext.ACTIVITY_ID_START]
+
+        current_activity = self.activity_by_id[AppContext.ACTIVITY_ID_START]
         while True:
-            next_activity_id = self.current_activity.execute()
-            self.current_activity = self.activity_by_id[next_activity_id]
+            next_activity_id = current_activity.execute()
+            current_activity = self.activity_by_id[next_activity_id]
 
 
 def main():

@@ -179,9 +179,10 @@ class CameraActivity:
                 self.execute_timelapse()
 
     def execute_photo(self):
+        photo_path = '/home/pi/picamera-images/single/image_{}.jpg'.format(int(time.time()))
         proc_args = [
             'raspistill',
-            '--output', '/home/pi/picamera-images/single/image_{}.jpg'.format(int(time.time())),
+            '--output', photo_path,
             '--timeout', '1000',
         ]
 
@@ -195,6 +196,10 @@ class CameraActivity:
         self.context.process_controller.wait_process(
             title='Making photo...',
             args=proc_args,
+        )
+
+        self.context.telegram_controller.send_photo(
+            photo_path=photo_path,
         )
 
     def execute_settings(self):

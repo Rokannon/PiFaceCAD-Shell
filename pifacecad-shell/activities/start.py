@@ -37,6 +37,6 @@ class StartActivity:
             elif self.selected_option == OPTION_WIFI:
                 return AppContext.ACTIVITY_ID_WIFI
             elif self.selected_option == OPTION_TEST:
-                self.context.input_controller.wait_input()
+                pass
             elif self.selected_option == OPTION_CAMERA:
                 return AppContext.ACTIVITY_ID_CAMERA
