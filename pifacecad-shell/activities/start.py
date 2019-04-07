@@ -17,7 +17,7 @@ class StartActivity:
         if self.first_run:
             self.first_run = False
             self.context.display_renderer.set_line('PiFaceCAD Shell', DisplayRenderer.LINE_FIRST)
-            self.context.display_renderer.set_line('v1.0', DisplayRenderer.LINE_SECOND)
+            self.context.display_renderer.set_line('v' + AppContext.VERSION, DisplayRenderer.LINE_SECOND)
             self.context.button_controller.wait_button_press()
 
         while True:

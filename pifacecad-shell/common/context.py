@@ -6,6 +6,8 @@ from pifacecad import PiFaceCAD
 
 
 class AppContext:
+    VERSION = '1.0.0'
+
     ACTIVITY_ID_START = 0
     ACTIVITY_ID_HELLO = 1
     ACTIVITY_ID_WIFI = 2
