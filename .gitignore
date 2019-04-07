@@ -106,3 +106,4 @@ venv.bak/
 copy_to_raspberrypi.bat
 copy_from_raspberrypi.bat
 picamera-images/
+pifacecad-shell/settings.json
