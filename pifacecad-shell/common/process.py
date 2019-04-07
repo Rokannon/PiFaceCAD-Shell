@@ -27,7 +27,7 @@ class ProcessController:
             stderr=subprocess.PIPE,
         )
         self.display_renderer.cursor_on()
-        while proc.poll() is None or time.time() - start_time < 2:
+        while proc.poll() is None or time.time() - start_time < 1:
             cursor_position = int(5 * (time.time() - start_time)) % DisplayRenderer.DISPLAY_WIDTH
             self.display_renderer.set_cursor(cursor_position, DisplayRenderer.LINE_FIRST)
             time.sleep(0.1)
